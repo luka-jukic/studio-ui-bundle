@@ -33,6 +33,9 @@ const MARKER_CLASS = {
   error: '.pimcore_editable_video_error'
 } as const
 
+// the player (iframe/video), or the preview image rendered with the editable option "editmodeImagePreview"
+const VIDEO_ELEMENT_SELECTOR = 'iframe, video, .pimcore_editable_video > img'
+
 export interface VideoEditableProps {
   value?: VideoValue | null
   onChange?: (value: VideoValue | null) => void
@@ -130,7 +133,7 @@ export const VideoEditable = ({
       setErrorElement(element)
     })
 
-    const videoElement = container.querySelector('iframe, video')
+    const videoElement = container.querySelector(VIDEO_ELEMENT_SELECTOR)
 
     if (!isNull(videoElement) && isNull(wrapperElement)) {
       const wrapper = document.createElement('div')
